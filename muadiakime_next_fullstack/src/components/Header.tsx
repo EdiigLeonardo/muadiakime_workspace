@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { ShoppingCart, Heart, Search, User } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
+import { MegaMenu } from "./MegaMenu";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -104,6 +105,7 @@ export default function Header() {
           )}
         </div>
       </div>
+      <MegaMenu />
     </header>
   );
 }
