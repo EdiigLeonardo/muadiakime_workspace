@@ -105,7 +105,7 @@ export default function Header() {
           )}
         </div>
       </div>
-      <MegaMenu />
+      {isLoggedIn && <MegaMenu />}
     </header>
   );
 }
