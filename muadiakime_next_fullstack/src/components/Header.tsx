@@ -14,7 +14,7 @@ export default function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="w-full border-b">
+    <header className="w-full border-b min-h-['70px']">
       {/* Top banner */}
       <div className="bg-black text-white text-sm text-center py-1 px-4">
         Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!{" "}
