@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="bg-black text-white px-8 py-12">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
         <div>
-          <h3 className="font-bold mb-2">Exclusive</h3>
+          <h3 className="font-bold mb-2">Muadiakime</h3>
           <p className="text-sm">Get 10% off your first order</p>
           <div className="flex mt-2">
             <Input placeholder="Enter your email" className="rounded-l-md" />
@@ -21,7 +21,7 @@ export default function Footer() {
           <p className="text-sm">
             111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
           </p>
-          <p className="text-sm">exclusive@gmail.com</p>
+          <p className="text-sm">muadiakime@gmail.com</p>
           <p className="text-sm">+88015-88888-9999</p>
         </div>
         <div>

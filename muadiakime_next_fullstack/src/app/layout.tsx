@@ -6,7 +6,7 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Exclusive Store",
+  title: "Muadiakime Store",
   description: "E-commerce built with Next.js",
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
         style={{ height: "100%" }}
       >
         <Header />
-        <main>{children}</main>
+        <main className="min-h-['50%']">{children}</main>
         <Footer />
       </body>
     </html>
