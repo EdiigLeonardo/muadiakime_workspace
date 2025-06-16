@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { ShoppingCart, Heart, Search, User } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
-import { MegaMenu } from "./MegaMenu";
+// import { MegaMenu } from "./MegaMenu";
 import { CartModal } from "./CartModal";
 import Image from "next/image";
 
@@ -16,6 +16,13 @@ export default function Header() {
   const [cartItems, setCartItems] = useState(3);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
+  if (isLoggedIn === null) {
+    console.log(() => {
+      setIsLoggedIn(true);
+      setIsCartOpen(true);
+      setCartItems(5);
+    });
+  }
 
   return (
     <header className="w-full border-b min-h-['70px']">
