@@ -8,10 +8,13 @@ import { ShoppingCart, Heart, Search, User } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
 import { MegaMenu } from "./MegaMenu";
+import { CartModal } from "./CartModal";
+import Image from "next/image";
 
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartItems, setCartItems] = useState(3);
+  const [isCartOpen, setIsCartOpen] = useState(false);
   const pathname = usePathname();
 
   return (
@@ -83,7 +86,11 @@ export default function Header() {
 
           {/* Cart icon with badge */}
           <div className="relative cursor-pointer">
-            <ShoppingCart />
+            <ShoppingCart
+              onClick={() => setIsCartOpen(true)}
+              className="relative"
+            />
+            {isCartOpen && <CartModal onClose={() => setIsCartOpen(false)} />}
             {cartItems > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1">
                 {cartItems}
@@ -95,7 +102,7 @@ export default function Header() {
           {isLoggedIn ? (
             <div className="relative">
               <Avatar className="relative w-10 h-10 cursor-pointer">
-                <img src="https://i.pravatar.cc/40" alt="User Avatar" />
+                <Image src="https://i.pravatar.cc/40" alt="User Avatar" fill />
               </Avatar>
             </div>
           ) : (
