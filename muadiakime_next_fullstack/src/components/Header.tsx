@@ -112,7 +112,7 @@ export default function Header() {
           )}
         </div>
       </div>
-      {isLoggedIn && <MegaMenu />}
+      {/* {isLoggedIn && <MegaMenu />} */}
     </header>
   );
 }
