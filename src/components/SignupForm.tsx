@@ -18,7 +18,7 @@ export default function SignupForm() {
   };
 
   return (
-    <div className="grid justify-self-center max-w-md  space-y-6 border-red-500 rounded-2xl border-2 lg:p-6 md:p-3 sm:p-1 lg:w-1/2 md:w-full">
+    <div className="grid justify-self-center max-w-md  space-y-6 border-primary rounded-2xl border-2 lg:p-6 md:p-3 sm:p-1 lg:w-1/2 md:w-full">
       <h2 className="text-2xl font-bold">Create an account</h2>
       <p className="text-sm text-muted-foreground">Enter your details below</p>
       <form
@@ -62,9 +62,7 @@ export default function SignupForm() {
           Password must be at least 6 characters.
         </p>
 
-        <Button className="w-full bg-red-500 hover:bg-red-600">
-          Create Account
-        </Button>
+        <Button className="w-full bg-primary">Create Account</Button>
       </form>
       <Separator />
       <Button variant="outline" className="w-full">
@@ -72,7 +70,7 @@ export default function SignupForm() {
       </Button>
       <p className="text-sm text-center">
         Already have account?{" "}
-        <a href="/login" className="text-red-500 hover:underline">
+        <a href="/login" className="bg-primary hover:underline">
           Log in
         </a>
       </p>

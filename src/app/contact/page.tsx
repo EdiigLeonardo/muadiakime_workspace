@@ -8,7 +8,7 @@ export default function ContactPage() {
     <div className="container mx-auto px-4 py-12">
       {/* Breadcrumbs */}
       <div className="text-sm text-gray-500 mb-8">
-        <span className="text-black">Muadiakime</span> / Home / Contact
+        <span className="text-black">Muadiakimi</span> / Home / Contact
       </div>
 
       <h1 className="text-3xl font-bold mb-12">Contact Us</h1>
@@ -33,8 +33,8 @@ export default function ContactPage() {
                 <p className="text-gray-600 mb-2">
                   If true, our form part we will contact you within at home.
                 </p>
-                <p className="font-medium">Email: customers@muadiakime.com</p>
-                <p className="font-medium">Email: support@muadiakime.com</p>
+                <p className="font-medium">Email: customers@Muadiakimi.com</p>
+                <p className="font-medium">Email: support@Muadiakimi.com</p>
               </div>
             </div>
           </div>

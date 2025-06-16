@@ -39,7 +39,7 @@ export default function Header() {
       <div className="flex flex-col sm:flex-row items-center justify-between px-6 py-4 gap-4">
         {/* Logo */}
         <Link href="/" className="text-2xl font-bold text-black">
-          Muadiakime
+          Muadiakimi
         </Link>
 
         {/* Nav Links */}

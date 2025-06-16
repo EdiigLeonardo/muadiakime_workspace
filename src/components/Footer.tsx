@@ -1,18 +1,20 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { ArrowBigRight } from "lucide-react";
 
 export default function Footer() {
+  console.log("foo");
   return (
-    <footer className="bg-black text-white px-8 py-12">
+    <footer className="bg-primary text-white px-8 py-12">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
         <div>
-          <h3 className="font-bold mb-2">Muadiakime</h3>
+          <h3 className="font-bold mb-2">Muadiakimi</h3>
           <p className="text-sm">Get 10% off your first order</p>
-          <div className="flex mt-2">
+          <div className="flex mt-2 gap-2">
             <Input placeholder="Enter your email" className="rounded-l-md" />
-            <Button className="rounded-r-md bg-white text-black hover:bg-gray-200">
-              →
+            <Button className="rounded-r-md bg-white text-primary hover:bg-gray-200">
+              <ArrowBigRight />
             </Button>
           </div>
         </div>
@@ -21,7 +23,7 @@ export default function Footer() {
           <p className="text-sm">
             111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
           </p>
-          <p className="text-sm">muadiakime@gmail.com</p>
+          <p className="text-sm">Muadiakimi@gmail.com</p>
           <p className="text-sm">+88015-88888-9999</p>
         </div>
         <div>
@@ -64,9 +66,10 @@ export default function Footer() {
         <div>
           <div className="max-w-50 flex gap-2">
             <div
-              className=" bg-gray-100"
+              className=" bg-gray-100 relative"
               style={{ width: "calc(100% / 2)", aspectRatio: "1/1" }}
             >
+              <Image src="/qr-code.jpg" fill alt="qr-code-image" />
               {/* TODO: Should Implement QRCODe */}
             </div>
             <div className="w-1/2 min-h-full flex flex-col justify-center items-center gap-2.5">
@@ -79,12 +82,12 @@ export default function Footer() {
                   className="w-full"
                 />
               </div>
-              <div className="w-full h-1/3 p-5 border-2 border-amber-50 rounded-lg relative">
+              <div className="w-full h-1/3 p-5 border-2 border-amber-50 rounded-lg relative flex">
                 <Image
                   src="/apple-pay.png"
                   alt="App Store"
                   fill
-                  className="w-full"
+                  className="w-full justify-self-center aspect-['1 / 2']"
                 />
               </div>
               {/* <img src="" alt="Google Play" className="w-32" />
