@@ -15,12 +15,14 @@ export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [cartItems, setCartItems] = useState(3);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [favoriteItems, setFavoriteItems] = useState(5);
   const pathname = usePathname();
   if (isLoggedIn === null) {
     console.log(() => {
       setIsLoggedIn(true);
       setIsCartOpen(true);
       setCartItems(5);
+      setFavoriteItems(4);
     });
   }
 
@@ -89,7 +91,16 @@ export default function Header() {
           </div>
 
           {/* Icons */}
-          <Heart className="cursor-pointer" />
+          <Link href="/wishlist" className="h-full">
+            <div className="relative cursor-pointer">
+              <Heart className="z-2" />
+              {favoriteItems > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs rounded-full px-1 z-3">
+                  {favoriteItems}
+                </span>
+              )}
+            </div>
+          </Link>
 
           {/* Cart icon with badge */}
           <div className="relative cursor-pointer">

@@ -72,27 +72,6 @@ export default function Footer() {
               <Image src="/qr-code.jpg" fill alt="qr-code-image" />
               {/* TODO: Should Implement QRCODe */}
             </div>
-            <div className="w-1/2 min-h-full flex flex-col justify-center items-center gap-2.5">
-              {" "}
-              <div className="w-full h-1/3 p-5 border-2 border-amber-50 rounded-lg relative">
-                <Image
-                  src="/google-pay.png"
-                  alt="Google Pay"
-                  fill
-                  className="w-full"
-                />
-              </div>
-              <div className="w-full h-1/3 p-5 border-2 border-amber-50 rounded-lg relative flex">
-                <Image
-                  src="/apple-pay.png"
-                  alt="App Store"
-                  fill
-                  className="w-full justify-self-center aspect-['1 / 2']"
-                />
-              </div>
-              {/* <img src="" alt="Google Play" className="w-32" />
-            <img src="/app-store.png" alt="App Store" className="w-32" /> */}
-            </div>
           </div>
           <h4 className="font-bold mb-2">Download App</h4>
           <p className="text-sm mb-2">Save $3 with App New User Only</p>
