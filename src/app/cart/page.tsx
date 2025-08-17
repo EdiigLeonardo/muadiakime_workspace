@@ -12,7 +12,7 @@ import {
 
 export default function CartPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 relative">
       {/* Breadcrumbs */}
       <div className="text-sm text-gray-600 mb-8">
         Home / <span className="font-semibold">Cart</span>

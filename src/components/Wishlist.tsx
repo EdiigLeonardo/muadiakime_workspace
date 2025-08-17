@@ -76,7 +76,7 @@ export function Wishlist() {
 
               <Button
                 variant="outline"
-                className="w-full bg-primary text-secondary"
+                className="w-full bg-gray-900 text-secondary"
               >
                 Add To Cart
               </Button>

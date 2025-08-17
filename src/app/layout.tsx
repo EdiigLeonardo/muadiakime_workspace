@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Muadiakimi Store",
-  description: "E-commerce built with Next.js",
+  description: "E-commerce Made by DrupeFeller",
 };
 
 export default function RootLayout({
@@ -16,13 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" style={{ height: "100vh" }}>
-      <body
-        className={`${inter.className} flex min-h-screen flex-col `}
-        style={{ height: "100vh" }}
-      >
+    <html lang="en" style={{ height: "100%" }}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <Header />
-        <main style={{ height: "100vh" }}>{children}</main>
+        <main className="flex-grow">{children}</main>
         <Footer />
       </body>
     </html>

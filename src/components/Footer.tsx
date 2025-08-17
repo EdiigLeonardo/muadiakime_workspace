@@ -6,7 +6,7 @@ import { ArrowBigRight } from "lucide-react";
 export default function Footer() {
   console.log("foo");
   return (
-    <footer className="bg-primary text-white px-8 py-12 relative">
+    <footer className="bg-gray-900 text-white px-8 py-12 flex">
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
         <div>
           <h3 className="font-bold mb-2">Muadiakimi</h3>

@@ -82,7 +82,7 @@ export default function ProductPage() {
           </div>
 
           {/* Add to Cart Button */}
-          <Button className="w-full py-6 text-lg bg-primary text-secondary">
+          <Button className="w-full py-6 text-lg bg-gray-900 text-secondary">
             Add to Cart
           </Button>
         </div>

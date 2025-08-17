@@ -62,7 +62,7 @@ export default function SignupForm() {
           Password must be at least 6 characters.
         </p>
 
-        <Button className="w-full bg-primary">Create Account</Button>
+        <Button className="w-full bg-gray-900">Create Account</Button>
       </form>
       <Separator />
       <Button variant="outline" className="w-full">
@@ -70,7 +70,7 @@ export default function SignupForm() {
       </Button>
       <p className="text-sm text-center">
         Already have account?{" "}
-        <a href="/login" className="bg-primary hover:underline">
+        <a href="/login" className="hover:underline">
           Log in
         </a>
       </p>
