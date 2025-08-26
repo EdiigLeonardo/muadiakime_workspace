@@ -1,5 +1,6 @@
-import SignUpPage from "./sign-up/page";
+import AuthRoutes from "./AuthRoutes";
 
 export default function Home() {
-  return <SignUpPage />;
+  const isAuthenticated = true; // Replace with actual authentication logic
+  return <AuthRoutes isAuthenticated={isAuthenticated} />;
 }
