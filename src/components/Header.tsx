@@ -57,27 +57,27 @@ export default function Header() {
           <Link
             href="/contact"
             className={`hover:underline ${
-              pathname === "/contact" ? "font-semibold underline" : ""
+              pathname === "/contactos" ? "font-semibold underline" : ""
             }`}
           >
-            Contact
+            Contactos
           </Link>
           <Link
-            href="/about"
+            href="/sobre"
             className={`hover:underline ${
-              pathname === "/about" ? "font-semibold underline" : ""
+              pathname === "/sobre" ? "font-semibold underline" : ""
             }`}
           >
-            About
+            Sobre Nós
           </Link>
           {!isLoggedIn && (
             <Link
-              href="/sign-up"
+              href="/login"
               className={`hover:underline ${
-                pathname === "/sign-up" ? "font-semibold underline" : ""
+                pathname === "/login" ? "font-semibold underline" : ""
               }`}
             >
-              Sign Up
+              Login
             </Link>
           )}
         </nav>
