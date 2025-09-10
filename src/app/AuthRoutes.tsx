@@ -1,4 +1,4 @@
-'use-client'
+'use client'
 import React from 'react';
 import SignInPage from './auth/sign-in/page';
 import SignUpPage from './auth/sign-up/page';

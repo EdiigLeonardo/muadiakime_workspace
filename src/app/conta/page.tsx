@@ -5,46 +5,90 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { useZodForm } from "@/lib/hooks/useZodForm";
+import { profileSchema, addressSchema, paymentSchema } from "@/lib/validations/account";
 
 export default function MyAccountPage() {
   const [activeTab, setActiveTab] = useState<"profile" | "address" | "payment">(
     "profile"
   );
-  const [formData, setFormData] = useState({
-    profile: {
+  const [successMessage, setSuccessMessage] = useState("");
+  
+  // Profile form
+  const {
+    formData: profileData,
+    errors: profileErrors,
+    isSubmitting: isProfileSubmitting,
+    handleChange: handleProfileChange,
+    handleSubmit: handleProfileSubmit,
+  } = useZodForm({
+    schema: profileSchema,
+    initialValues: {
       firstName: "Mid",
       lastName: "Rimel",
       email: "rimellill@gmail.com",
       address: "Kingston, 5236, United State",
-    },
-    address: {
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    }
+  });
+  
+  // Address form
+  const {
+    formData: addressData,
+    errors: addressErrors,
+    isSubmitting: isAddressSubmitting,
+    handleChange: handleAddressChange,
+    handleSubmit: handleAddressSubmit,
+  } = useZodForm({
+    schema: addressSchema,
+    initialValues: {
       street: "",
       city: "",
       zip: "",
       country: "",
-    },
-    payment: {
+    }
+  });
+  
+  // Payment form
+  const {
+    formData: paymentData,
+    errors: paymentErrors,
+    isSubmitting: isPaymentSubmitting,
+    handleChange: handlePaymentChange,
+    handleSubmit: handlePaymentSubmit,
+  } = useZodForm({
+    schema: paymentSchema,
+    initialValues: {
       cardNumber: "",
       expiry: "",
       cvv: "",
-    },
+    }
   });
-
-  const handleChange = (form: string, field: string, value: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      [form]: {
-        ...prev[form as keyof typeof formData],
-        [field]: value,
-      },
-    }));
-  };
-
+  
   const handleSubmit = () => {
-    // Aqui você pode enviar todos os dados de uma vez
-    // ou apenas os dados do formulário ativo
-    console.log("Dados salvos:", formData);
-    // Simular salvamento
+    setSuccessMessage("");
+    
+    if (activeTab === "profile") {
+      handleProfileSubmit((validData) => {
+        // eslint-disable-next-line no-console
+        console.log("Profile data saved:", validData);
+        setSuccessMessage("Profile updated successfully!");
+      })();
+    } else if (activeTab === "address") {
+      handleAddressSubmit((validData) => {
+        // eslint-disable-next-line no-console
+        console.log("Address data saved:", validData);
+        setSuccessMessage("Address updated successfully!");
+      })();
+    } else if (activeTab === "payment") {
+      handlePaymentSubmit((validData) => {
+        // eslint-disable-next-line no-console
+        console.log("Payment data saved:", validData);
+        setSuccessMessage("Payment information updated successfully!");
+      })();
+    }
   };
 
   return (
@@ -99,6 +143,11 @@ export default function MyAccountPage() {
         <div className="flex-1">
           {activeTab === "profile" && (
             <>
+              {successMessage && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                  {successMessage}
+                </div>
+              )}
               <h2 className="font-bold text-lg mb-6">Edit Your Profile</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                 <div>
@@ -106,22 +155,26 @@ export default function MyAccountPage() {
                     First Name
                   </label>
                   <Input
-                    value={formData.profile.firstName}
-                    onChange={(e) =>
-                      handleChange("profile", "firstName", e.target.value)
-                    }
+                    name="firstName"
+                    value={profileData.firstName}
+                    onChange={handleProfileChange}
                   />
+                  {profileErrors.firstName && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.firstName}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Last Name
                   </label>
                   <Input
-                    value={formData.profile.lastName}
-                    onChange={(e) =>
-                      handleChange("profile", "lastName", e.target.value)
-                    }
+                    name="lastName"
+                    value={profileData.lastName}
+                    onChange={handleProfileChange}
                   />
+                  {profileErrors.lastName && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.lastName}</p>
+                  )}
                 </div>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -130,22 +183,26 @@ export default function MyAccountPage() {
                     Email
                   </label>
                   <Input
-                    value={formData.profile.email}
-                    onChange={(e) =>
-                      handleChange("profile", "email", e.target.value)
-                    }
+                    name="email"
+                    value={profileData.email}
+                    onChange={handleProfileChange}
                   />
+                  {profileErrors.email && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.email}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Address
                   </label>
                   <Input
-                    value={formData.profile.address}
-                    onChange={(e) =>
-                      handleChange("profile", "address", e.target.value)
-                    }
+                    name="address"
+                    value={profileData.address}
+                    onChange={handleProfileChange}
                   />
+                  {profileErrors.address && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.address}</p>
+                  )}
                 </div>
               </div>
               <Separator className="my-6" />
@@ -155,19 +212,43 @@ export default function MyAccountPage() {
                   <label className="block text-sm font-medium mb-1">
                     Current Password
                   </label>
-                  <Input type="password" />
+                  <Input 
+                    type="password" 
+                    name="currentPassword"
+                    value={profileData.currentPassword}
+                    onChange={handleProfileChange}
+                  />
+                  {profileErrors.currentPassword && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.currentPassword}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     New Password
                   </label>
-                  <Input type="password" />
+                  <Input 
+                    type="password" 
+                    name="newPassword"
+                    value={profileData.newPassword}
+                    onChange={handleProfileChange}
+                  />
+                  {profileErrors.newPassword && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.newPassword}</p>
+                  )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Confirm New Password
                   </label>
-                  <Input type="password" />
+                  <Input 
+                    type="password" 
+                    name="confirmPassword"
+                    value={profileData.confirmPassword}
+                    onChange={handleProfileChange}
+                  />
+                  {profileErrors.confirmPassword && (
+                    <p className="text-xs text-red-500 mt-1">{profileErrors.confirmPassword}</p>
+                  )}
                 </div>
               </div>
             </>
@@ -175,6 +256,11 @@ export default function MyAccountPage() {
 
           {activeTab === "address" && (
             <>
+              {successMessage && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                  {successMessage}
+                </div>
+              )}
               <h2 className="font-bold text-lg mb-6">Address Book</h2>
               <div className="space-y-4 mb-6">
                 <div>
@@ -182,11 +268,13 @@ export default function MyAccountPage() {
                     Street Address
                   </label>
                   <Input
-                    value={formData.address.street}
-                    onChange={(e) =>
-                      handleChange("address", "street", e.target.value)
-                    }
+                    name="street"
+                    value={addressData.street}
+                    onChange={handleAddressChange}
                   />
+                  {addressErrors.street && (
+                    <p className="text-xs text-red-500 mt-1">{addressErrors.street}</p>
+                  )}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -194,22 +282,26 @@ export default function MyAccountPage() {
                       City
                     </label>
                     <Input
-                      value={formData.address.city}
-                      onChange={(e) =>
-                        handleChange("address", "city", e.target.value)
-                      }
+                      name="city"
+                      value={addressData.city}
+                      onChange={handleAddressChange}
                     />
+                    {addressErrors.city && (
+                      <p className="text-xs text-red-500 mt-1">{addressErrors.city}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">
                       ZIP Code
                     </label>
                     <Input
-                      value={formData.address.zip}
-                      onChange={(e) =>
-                        handleChange("address", "zip", e.target.value)
-                      }
+                      name="zip"
+                      value={addressData.zip}
+                      onChange={handleAddressChange}
                     />
+                    {addressErrors.zip && (
+                      <p className="text-xs text-red-500 mt-1">{addressErrors.zip}</p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -217,11 +309,13 @@ export default function MyAccountPage() {
                     Country
                   </label>
                   <Input
-                    value={formData.address.country}
-                    onChange={(e) =>
-                      handleChange("address", "country", e.target.value)
-                    }
+                    name="country"
+                    value={addressData.country}
+                    onChange={handleAddressChange}
                   />
+                  {addressErrors.country && (
+                    <p className="text-xs text-red-500 mt-1">{addressErrors.country}</p>
+                  )}
                 </div>
               </div>
             </>
@@ -229,6 +323,11 @@ export default function MyAccountPage() {
 
           {activeTab === "payment" && (
             <>
+              {successMessage && (
+                <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                  {successMessage}
+                </div>
+              )}
               <h2 className="font-bold text-lg mb-6">Payment Options</h2>
               <div className="space-y-4 mb-6">
                 <div>
@@ -236,12 +335,14 @@ export default function MyAccountPage() {
                     Card Number
                   </label>
                   <Input
-                    value={formData.payment.cardNumber}
-                    onChange={(e) =>
-                      handleChange("payment", "cardNumber", e.target.value)
-                    }
+                    name="cardNumber"
+                    value={paymentData.cardNumber}
+                    onChange={handlePaymentChange}
                     placeholder="1234 5678 9012 3456"
                   />
+                  {paymentErrors.cardNumber && (
+                    <p className="text-xs text-red-500 mt-1">{paymentErrors.cardNumber}</p>
+                  )}
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -249,24 +350,28 @@ export default function MyAccountPage() {
                       Expiry Date
                     </label>
                     <Input
-                      value={formData.payment.expiry}
-                      onChange={(e) =>
-                        handleChange("payment", "expiry", e.target.value)
-                      }
+                      name="expiry"
+                      value={paymentData.expiry}
+                      onChange={handlePaymentChange}
                       placeholder="MM/YY"
                     />
+                    {paymentErrors.expiry && (
+                      <p className="text-xs text-red-500 mt-1">{paymentErrors.expiry}</p>
+                    )}
                   </div>
                   <div>
                     <label className="block text-sm font-medium mb-1">
                       CVV
                     </label>
                     <Input
-                      value={formData.payment.cvv}
-                      onChange={(e) =>
-                        handleChange("payment", "cvv", e.target.value)
-                      }
+                      name="cvv"
+                      value={paymentData.cvv}
+                      onChange={handlePaymentChange}
                       placeholder="123"
                     />
+                    {paymentErrors.cvv && (
+                      <p className="text-xs text-red-500 mt-1">{paymentErrors.cvv}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -278,8 +383,12 @@ export default function MyAccountPage() {
             <Button variant="outline" className="px-8">
               Cancel
             </Button>
-            <Button className="px-8" onClick={handleSubmit}>
-              Save Changes
+            <Button 
+              className="px-8" 
+              onClick={handleSubmit} 
+              disabled={isProfileSubmitting || isAddressSubmitting || isPaymentSubmitting}
+            >
+              {(isProfileSubmitting || isAddressSubmitting || isPaymentSubmitting) ? "Saving..." : "Save Changes"}
             </Button>
           </div>
         </div>

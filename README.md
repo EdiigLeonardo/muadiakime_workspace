@@ -37,4 +37,32 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## Code Quality Tools
+
+### ESLint
+
+This project uses ESLint for code linting. To run the linter:
+
+```bash
+npm run lint
+```
+
+### Prettier
+
+Prettier is configured for code formatting. To format your code:
+
+```bash
+npm run format
+```
+
+To check if your code is properly formatted without making changes:
+
+```bash
+npm run format:check
+```
+
+### VS Code Integration
+
+If you're using VS Code, install the ESLint and Prettier extensions for automatic linting and formatting on save.
+
 1. Implementar swagger e

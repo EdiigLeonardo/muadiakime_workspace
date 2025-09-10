@@ -56,6 +56,7 @@ export default function CheckoutPage() {
       paymentMethod: form.cashOnDelivery ? "Cash on delivery" : "VISA",
     };
     // TODO: Send payload to backend (e.g., fetch/axios)
+    // eslint-disable-next-line no-console
     console.log("Order payload:", payload);
   };
 

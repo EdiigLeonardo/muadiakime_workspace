@@ -4,27 +4,21 @@
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { usePathname } from "next/navigation";
-import { ShoppingCart, Heart, Search, User } from "lucide-react";
+import { ShoppingCart, Heart, Search, User, LogOut } from "lucide-react";
 import { useState } from "react";
 import { Avatar } from "@/components/ui/avatar";
 // import { MegaMenu } from "./MegaMenu";
 import { CartModal } from "./CartModal";
 import Image from "next/image";
+import { useAuth } from "@/lib/hooks/useAuth";
+// import { Button } from "./ui/button";
 
 export default function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [cartItems, setCartItems] = useState(3);
+  const { user, isAuthenticated, signOut } = useAuth();
+  const [cartItems] = useState(3);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [favoriteItems, setFavoriteItems] = useState(5);
+  const [favoriteItems] = useState(5);
   const pathname = usePathname();
-  if (isLoggedIn === null) {
-    console.log(() => {
-      setIsLoggedIn(true);
-      setIsCartOpen(true);
-      setCartItems(5);
-      setFavoriteItems(4);
-    });
-  }
 
   return (
     <header className="w-full border-b min-h-['70px']">
@@ -55,7 +49,7 @@ export default function Header() {
             Home
           </Link>
           <Link
-            href="/contact"
+            href="/contactos"
             className={`hover:underline ${
               pathname === "/contactos" ? "font-semibold underline" : ""
             }`}
@@ -70,11 +64,11 @@ export default function Header() {
           >
             Sobre Nós
           </Link>
-          {!isLoggedIn && (
+          {!isAuthenticated && (
             <Link
-              href="/login"
+              href="/auth/sign-in"
               className={`hover:underline ${
-                pathname === "/login" ? "font-semibold underline" : ""
+                pathname === "/auth/sign-in" ? "font-semibold underline" : ""
               }`}
             >
               Login
@@ -91,7 +85,7 @@ export default function Header() {
           </div>
 
           {/* Icons */}
-          <Link href="/wishlist" className="h-full">
+          <Link href="/favoritos" className="h-full">
             <div className="relative cursor-pointer">
               <Heart className="z-2" />
               {favoriteItems > 0 && (
@@ -117,20 +111,42 @@ export default function Header() {
           </div>
 
           {/* User icon or avatar */}
-          {isLoggedIn ? (
-            <div className="relative">
+          {isAuthenticated ? (
+            <div className="relative group">
               <Avatar className="relative w-10 h-10 cursor-pointer">
-                <Image src="https://i.pravatar.cc/40" alt="User Avatar" fill />
+                {user?.image ? (
+                  <Image src={user.image} alt={user.name || "User Avatar"} fill />
+                ) : (
+                  <div className="flex items-center justify-center w-full h-full bg-gray-200 text-gray-700">
+                    {user?.name?.charAt(0) || "U"}
+                  </div>
+                )}
               </Avatar>
+              
+              {/* Dropdown menu */}
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-10 hidden group-hover:block">
+                <Link href="/conta" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                  Profile
+                </Link>
+                <button
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  <div className="flex items-center">
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Sign out
+                  </div>
+                </button>
+              </div>
             </div>
           ) : (
-            <Link href="/login">
+            <Link href="/auth/sign-in">
               <User className="h-5 w-5 cursor-pointer" />
             </Link>
           )}
         </div>
       </div>
-      {/* {isLoggedIn && <MegaMenu />} */}
+      {/* {isAuthenticated && <MegaMenu />} */}
     </header>
   );
 }

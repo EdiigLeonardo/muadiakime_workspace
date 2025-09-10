@@ -10,7 +10,21 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  ...compat.extends(
+    "next/core-web-vitals",
+    "next/typescript"
+  ),
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    rules: {
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
+      "no-unused-vars": "warn",
+      "no-console": "warn"
+    }
+  }
+  // Prettier plugin is not installed, so we're removing the reference
+  // ...compat.extends("plugin:prettier/recommended")
 ];
 
 export default eslintConfig;

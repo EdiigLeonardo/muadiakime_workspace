@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowBigRight } from "lucide-react";
 
 export default function Footer() {
+  // eslint-disable-next-line no-console
   console.log("foo");
   return (
     <footer className="bg-gray-900 text-white px-8 py-12 flex">
